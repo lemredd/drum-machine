@@ -5,7 +5,11 @@ function App(): ReactElement {
 	return (
 		<>
 			<div id="drum-machine">
-				
+				<h3 id="display">
+					
+				</h3>
+					
+				</div>
 			</div>
 		</>
 	);
