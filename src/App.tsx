@@ -8,6 +8,7 @@ function App(): ReactElement {
 				<h3 id="display">
 					
 				</h3>
+				<div className="drum-pads">
 					
 				</div>
 			</div>
