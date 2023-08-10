@@ -12,6 +12,7 @@ const drum_pads = {
 	"kick": {},
 	"closed-hh": {}
 };
+const to_kebab_case = (str: string): string => str.split(/\s|_|(?=[A-Z])/g).join("-").toLocaleLowerCase();
 
 function App(): ReactElement {
 	return (
