@@ -52,7 +52,7 @@ const to_title_case = (str: string): string => str
 	.join(" ");
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
-	if (drum_pad_hotkeys.indexOf(event.key as DrumPadHotkey) === -1) return;
+	if (drum_pad_hotkeys.indexOf(event.key.toLocaleLowerCase() as DrumPadHotkey) === -1) return;
 
 	const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
 	const drum_pad = audio.parentElement as HTMLButtonElement;
