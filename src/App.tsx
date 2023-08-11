@@ -45,7 +45,11 @@ type DrumPadHotkey = (typeof drum_pads)[DrumPadLabel]["hotkey"]
 const drum_pad_labels = Object.keys(drum_pads) as DrumPadLabel[];
 const drum_pad_hotkeys = drum_pad_labels.map(label => drum_pads[label].hotkey);
 
-const to_kebab_case = (str: string): string => str.split(/\s|_|(?=[A-Z])/g).join("-").toLocaleLowerCase();
+const to_kebab_case = (str: string): string => str.split(/\s|_/g).join("-").toLocaleLowerCase();
+const to_title_case = (str: string): string => str
+	.split(/\s|_|-|(?=[A-Z])/g)
+	.map((word): string => `${word[0].toLocaleUpperCase()}${word.substring(1)}`)
+	.join(" ");
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
 	if (drum_pad_hotkeys.indexOf(event.key as DrumPadHotkey) === -1) return;
