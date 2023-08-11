@@ -57,9 +57,10 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
 	const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
 	const drum_pad = audio.parentElement as HTMLButtonElement;
 	const display = document.querySelector("#display") as HTMLHeadingElement;
+
 	audio.play().then((): void => {
 		display.innerText = to_title_case(drum_pad.id).toLocaleUpperCase();
-	});
+	}).catch(error => console.error(error));
 });
 
 function App(): ReactElement {
