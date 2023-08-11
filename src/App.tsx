@@ -58,7 +58,7 @@ function App(): ReactElement {
 		<>
 			<div id="drum-machine">
 				<h3 id="display">
-					
+					{audio_to_play}
 				</h3>
 				<div className="drum-pads">
 					{drum_pad_labels.map(label => (
