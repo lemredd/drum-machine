@@ -55,7 +55,12 @@ function App(): ReactElement {
 				<div className="drum-pads">
 					{drum_pad_labels.map(label => (
 						<button key={label} className="drum-pad" id={to_kebab_case(label)}>
-							{drum_pads[label].hotkey}
+							<audio
+								id={drum_pads[label].hotkey.toLocaleUpperCase()}
+								className="clip"
+								src={drum_pads[label].audio}
+							/>
+							{drum_pads[label].hotkey.toLocaleUpperCase()}
 						</button>
 					))}
 				</div>
