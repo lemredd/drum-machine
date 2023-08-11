@@ -46,7 +46,8 @@ const drum_pad_labels = Object.keys(drum_pads) as DrumPadLabel[];
 const to_kebab_case = (str: string): string => str.split(/\s|_|(?=[A-Z])/g).join("-").toLocaleLowerCase();
 
 function App(): ReactElement {
-	const [audio_to_play, set_audio_to_play] = useState("");
+	const [audio_to_play, set_audio_to_play] = useState<DrumPadLabel | "">("");
+
 
 	return (
 		<>
