@@ -4,39 +4,39 @@ import "./App.css";
 const drum_pads = {
 	"Heater 1": {
 		"hotkey": "q",
-		"audio": "",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3",
 	},
 	"Heater 2": {
 		"hotkey": "w",
-		"audio": "",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3",
 	},
 	"Heater 3": {
 		"hotkey": "e",
-		"audio": "",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3",
 	},
 	"Heater 4": {
 		"hotkey": "a",
-		"audio": "",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3",
 	},
 	"Clap": {
 		"hotkey": "s",
-		"audio": "",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3",
 	},
 	"Open HH": {
 		"hotkey": "d",
-		"audio": "",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3",
 	},
 	"Kick n' Hat": {
 		"hotkey": "z",
-		"audio": "",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3",
 	},
 	"Kick": {
 		"hotkey": "x",
-		"audio": "",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3",
 	},
 	"Closed HH": {
 		"hotkey": "c",
-		"audio": "",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3",
 	}
 } as const;
 
