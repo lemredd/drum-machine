@@ -53,7 +53,11 @@ function App(): ReactElement {
 					
 				</h3>
 				<div className="drum-pads">
-					
+					{drum_pad_labels.map(label => (
+						<button key={label} className="drum-pad" id={to_kebab_case(label)}>
+							{drum_pads[label].hotkey}
+						</button>
+					))}
 				</div>
 			</div>
 		</>
