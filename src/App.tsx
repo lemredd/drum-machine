@@ -3,39 +3,39 @@ import "./App.css";
 
 const drum_pads = {
 	"Heater 1": {
-		"key": "q",
+		"hotkey": "q",
 		"audio": "",
 	},
 	"Heater 2": {
-		"key": "w",
+		"hotkey": "w",
 		"audio": "",
 	},
 	"Heater 3": {
-		"key": "e",
+		"hotkey": "e",
 		"audio": "",
 	},
 	"Heater 4": {
-		"key": "a",
+		"hotkey": "a",
 		"audio": "",
 	},
 	"Clap": {
-		"key": "s",
+		"hotkey": "s",
 		"audio": "",
 	},
 	"Open HH": {
-		"key": "d",
+		"hotkey": "d",
 		"audio": "",
 	},
 	"Kick n' Hat": {
-		"key": "z",
+		"hotkey": "z",
 		"audio": "",
 	},
 	"Kick": {
-		"key": "x",
+		"hotkey": "x",
 		"audio": "",
 	},
 	"Closed HH": {
-		"key": "c",
+		"hotkey": "c",
 		"audio": "",
 	}
 } as const;
