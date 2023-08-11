@@ -8,4 +8,4 @@ export default {
 		"config": { "title": "⚙ Configurations" },
 		"scripts": { "title": "📜 Scripts" }
 	}
-}
+};

@@ -1,35 +1,102 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, type ReactElement } from "react";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+const drum_pads = {
+	"Heater 1": {
+		"hotkey": "q",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3",
+	},
+	"Heater 2": {
+		"hotkey": "w",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3",
+	},
+	"Heater 3": {
+		"hotkey": "e",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3",
+	},
+	"Heater 4": {
+		"hotkey": "a",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3",
+	},
+	"Clap": {
+		"hotkey": "s",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3",
+	},
+	"Open HH": {
+		"hotkey": "d",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3",
+	},
+	"Kick n' Hat": {
+		"hotkey": "z",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3",
+	},
+	"Kick": {
+		"hotkey": "x",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3",
+	},
+	"Closed HH": {
+		"hotkey": "c",
+		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3",
+	}
+} as const;
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+type DrumPadLabel = keyof typeof drum_pads;
+type DrumPadHotkey = (typeof drum_pads)[DrumPadLabel]["hotkey"]
+const drum_pad_labels = Object.keys(drum_pads) as DrumPadLabel[];
+const drum_pad_hotkeys = drum_pad_labels.map(label => drum_pads[label].hotkey);
+
+const to_kebab_case = (str: string): string => str.split(/\s|_/g).join("-").toLocaleLowerCase();
+const to_title_case = (str: string): string => str
+	.split(/\s|_|-|(?=[A-Z])/g)
+	.map((word): string => `${word[0].toLocaleUpperCase()}${word.substring(1)}`)
+	.join(" ");
+
+window.addEventListener("keydown", (event: KeyboardEvent) => {
+	if (drum_pad_hotkeys.indexOf(event.key.toLocaleLowerCase() as DrumPadHotkey) === -1) return;
+
+	const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
+	const drum_pad = audio.parentElement as HTMLButtonElement;
+	const display = document.querySelector("#display") as HTMLHeadingElement;
+
+	audio.play().then((): void => {
+		display.innerText = to_title_case(drum_pad.id).toLocaleUpperCase();
+	}).catch(error => console.error(error));
+});
+
+function App(): ReactElement {
+	const [audio_to_play, set_audio_to_play] = useState<DrumPadLabel | "">("");
+
+	function handle_click(event: React.MouseEvent<HTMLButtonElement>, label: DrumPadLabel): void {
+		const target = event.target as HTMLButtonElement;
+		const audio = target.firstChild as HTMLAudioElement;
+		audio.play().then(() => set_audio_to_play(label)).catch(err => console.error(err));
+	}
+
+	return (
+		<>
+			<div id="drum-machine">
+				<h3 id="display">
+					{audio_to_play.toLocaleUpperCase()}
+				</h3>
+				<div className="drum-pads">
+					{drum_pad_labels.map(label => (
+						<button
+							key={label} className="drum-pad"
+							id={to_kebab_case(label)}
+							onClick={(event): void => handle_click(event, label)}
+						>
+							<audio
+								id={drum_pads[label].hotkey.toLocaleUpperCase()}
+								className="clip"
+								src={drum_pads[label].audio}
+							/>
+							{drum_pads[label].hotkey.toLocaleUpperCase()}
+						</button>
+					))}
+				</div>
+			</div>
+		</>
+	);
 }
 
-export default App
+export default App;
