@@ -47,6 +47,13 @@ const drum_pad_hotkeys = drum_pad_labels.map(label => drum_pads[label].hotkey);
 
 const to_kebab_case = (str: string): string => str.split(/\s|_|(?=[A-Z])/g).join("-").toLocaleLowerCase();
 
+window.addEventListener("keydown", (event: KeyboardEvent) => {
+	if (drum_pad_hotkeys.indexOf(event.key as DrumPadHotkey) === -1) return;
+
+	const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
+	audio.play();
+});
+
 function App(): ReactElement {
 	const [audio_to_play, set_audio_to_play] = useState<DrumPadLabel | "">("");
 
