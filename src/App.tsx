@@ -41,6 +41,7 @@ const drum_pads = {
 } as const;
 
 type DrumPadLabel = keyof typeof drum_pads;
+type DrumPadHotkey = (typeof drum_pads)[DrumPadLabel]["hotkey"]
 const drum_pad_labels = Object.keys(drum_pads) as DrumPadLabel[];
 
 const to_kebab_case = (str: string): string => str.split(/\s|_|(?=[A-Z])/g).join("-").toLocaleLowerCase();
