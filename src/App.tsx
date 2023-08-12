@@ -5,13 +5,9 @@ import type { DrumPadLabel, DrumPadHotkey } from "./types";
 import { DRUM_PADS, DRUM_PAD_LABELS, DRUM_PAD_HOTKEYS } from "./constants";
 
 import to_kebab_case from "./helpers/to_kebab_case";
+import to_title_case from "./helpers/to_title_case";
 
 import "./App.css";
-
-const to_title_case = (str: string): string => str
-	.split(/\s|_|-|(?=[A-Z])/g)
-	.map((word): string => `${word[0].toLocaleUpperCase()}${word.substring(1)}`)
-	.join(" ");
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
 	if (DRUM_PAD_HOTKEYS.indexOf(event.key.toLocaleLowerCase() as DrumPadHotkey) === -1) return;
