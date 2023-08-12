@@ -9,6 +9,7 @@ import to_title_case from "./helpers/to_title_case";
 
 interface Props {
 	label: DrumPadLabel
+	audio_to_play: DrumPadLabel
 	set_audio_to_play: React.Dispatch<React.SetStateAction<DrumPadLabel | "">>
 }
 
@@ -26,7 +27,7 @@ function listen_for_hotkey_press(event: KeyboardEvent): void {
 		.catch((error): void => console.error(error));
 }
 
-export default function DrumPad({ label, set_audio_to_play }: Props): ReactElement {
+export default function DrumPad({ label, audio_to_play, set_audio_to_play }: Props): ReactElement {
 	function handle_click(event: React.MouseEvent<HTMLButtonElement>, label: DrumPadLabel): void {
 		const target = event.target as HTMLButtonElement;
 		const audio = target.firstChild as HTMLAudioElement;
