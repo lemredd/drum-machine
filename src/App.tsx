@@ -4,9 +4,10 @@ import type { DrumPadLabel, DrumPadHotkey } from "./types";
 
 import { DRUM_PADS, DRUM_PAD_LABELS, DRUM_PAD_HOTKEYS } from "./constants";
 
+import to_kebab_case from "./helpers/to_kebab_case";
+
 import "./App.css";
 
-const to_kebab_case = (str: string): string => str.split(/\s|_/g).join("-").toLocaleLowerCase();
 const to_title_case = (str: string): string => str
 	.split(/\s|_|-|(?=[A-Z])/g)
 	.map((word): string => `${word[0].toLocaleUpperCase()}${word.substring(1)}`)
