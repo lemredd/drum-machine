@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import { useEffect, type ReactElement } from "react";
 
 import type { DrumPadLabel, DrumPadHotkey } from "./types";
 
@@ -33,6 +33,13 @@ export default function DrumPad({ label, audio_to_play, set_audio_to_play }: Pro
 		const audio = target.firstChild as HTMLAudioElement;
 		audio.play().then(() => set_audio_to_play(label)).catch(err => console.error(err));
 	}
+
+	useEffect((): () => (void) => {
+		window.addEventListener("keydown", listen_for_hotkey_press);
+
+		return (): void => window.removeEventListener("keydown", listen_for_hotkey_press);
+	}, [audio_to_play]);
+
 	return (
 		<button
 			className="drum-pad"
