@@ -18,7 +18,7 @@ function App(): ReactElement {
 			</h3>
 			<div className="drum-pads">
 				{DRUM_PAD_LABELS.map(label => (
-					<DrumPad key={label} {...{ label, set_audio_to_play }} />
+					<DrumPad key={label} {...{ label, audio_to_play, set_audio_to_play }} />
 				))}
 			</div>
 		</div>
