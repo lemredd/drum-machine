@@ -7,10 +7,10 @@ import { DRUM_PADS, DRUM_PAD_HOTKEYS } from "./constants";
 import to_kebab_case from "./helpers/to_kebab_case";
 import to_title_case from "./helpers/to_title_case";
 
-interface Props {
+interface Props<TDrumPadLabelState = DrumPadLabel | ""> {
 	label: DrumPadLabel
-	audio_to_play: DrumPadLabel
-	set_audio_to_play: React.Dispatch<React.SetStateAction<DrumPadLabel | "">>
+	audio_to_play: TDrumPadLabelState
+	set_audio_to_play: React.Dispatch<React.SetStateAction<TDrumPadLabelState>>
 }
 
 function listen_for_hotkey_press(event: KeyboardEvent): void {
