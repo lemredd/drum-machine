@@ -2,10 +2,11 @@ import { useState, type ReactElement } from "react";
 
 import type { DrumPadLabel, DrumPadHotkey } from "./types";
 
-import { DRUM_PADS, DRUM_PAD_LABELS, DRUM_PAD_HOTKEYS } from "./constants";
+import { DRUM_PAD_LABELS, DRUM_PAD_HOTKEYS } from "./constants";
 
-import to_kebab_case from "./helpers/to_kebab_case";
 import to_title_case from "./helpers/to_title_case";
+
+import DrumPad from "./DrumPad";
 
 import "./App.css";
 
@@ -24,36 +25,17 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
 function App(): ReactElement {
 	const [audio_to_play, set_audio_to_play] = useState<DrumPadLabel | "">("");
 
-	function handle_click(event: React.MouseEvent<HTMLButtonElement>, label: DrumPadLabel): void {
-		const target = event.target as HTMLButtonElement;
-		const audio = target.firstChild as HTMLAudioElement;
-		audio.play().then(() => set_audio_to_play(label)).catch(err => console.error(err));
-	}
-
 	return (
-		<>
-			<div id="drum-machine">
-				<h3 id="display">
-					{audio_to_play.toLocaleUpperCase()}
-				</h3>
-				<div className="drum-pads">
-					{DRUM_PAD_LABELS.map(label => (
-						<button
-							key={label} className="drum-pad"
-							id={to_kebab_case(label)}
-							onClick={(event): void => handle_click(event, label)}
-						>
-							<audio
-								id={DRUM_PADS[label].hotkey.toLocaleUpperCase()}
-								className="clip"
-								src={DRUM_PADS[label].audio}
-							/>
-							{DRUM_PADS[label].hotkey.toLocaleUpperCase()}
-						</button>
-					))}
-				</div>
+		<div id="drum-machine">
+			<h3 id="display">
+				{audio_to_play.toLocaleUpperCase()}
+			</h3>
+			<div className="drum-pads">
+				{DRUM_PAD_LABELS.map(label => (
+					<DrumPad key={label} {...{ label, set_audio_to_play }} />
+				))}
 			</div>
-		</>
+		</div>
 	);
 }
 
