@@ -2,12 +2,12 @@ import { useState, type ReactElement } from "react";
 
 import type { DrumPadLabel, DrumPadHotkey } from "./types";
 
-import { drum_pads } from "./constants";
+import { DRUM_PADS } from "./constants";
 
 import "./App.css";
 
-const drum_pad_labels = Object.keys(drum_pads) as DrumPadLabel[];
-const drum_pad_hotkeys = drum_pad_labels.map(label => drum_pads[label].hotkey);
+const drum_pad_labels = Object.keys(DRUM_PADS) as DrumPadLabel[];
+const drum_pad_hotkeys = drum_pad_labels.map(label => DRUM_PADS[label].hotkey);
 
 const to_kebab_case = (str: string): string => str.split(/\s|_/g).join("-").toLocaleLowerCase();
 const to_title_case = (str: string): string => str
@@ -50,11 +50,11 @@ function App(): ReactElement {
 							onClick={(event): void => handle_click(event, label)}
 						>
 							<audio
-								id={drum_pads[label].hotkey.toLocaleUpperCase()}
+								id={DRUM_PADS[label].hotkey.toLocaleUpperCase()}
 								className="clip"
-								src={drum_pads[label].audio}
+								src={DRUM_PADS[label].audio}
 							/>
-							{drum_pads[label].hotkey.toLocaleUpperCase()}
+							{DRUM_PADS[label].hotkey.toLocaleUpperCase()}
 						</button>
 					))}
 				</div>

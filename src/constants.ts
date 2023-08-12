@@ -1,4 +1,4 @@
-export const drum_pads = {
+export const DRUM_PADS = {
 	"Heater 1": {
 		"hotkey": "q",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3",

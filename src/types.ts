@@ -1,4 +1,4 @@
-import { drum_pads } from "./constants";
+import { DRUM_PADS } from "./constants";
 
-export type DrumPadLabel = keyof typeof drum_pads;
-export type DrumPadHotkey = (typeof drum_pads)[DrumPadLabel]["hotkey"]
+export type DrumPadLabel = keyof typeof DRUM_PADS;
+export type DrumPadHotkey = (typeof DRUM_PADS)[DrumPadLabel]["hotkey"]
