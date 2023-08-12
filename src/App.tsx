@@ -2,12 +2,9 @@ import { useState, type ReactElement } from "react";
 
 import type { DrumPadLabel, DrumPadHotkey } from "./types";
 
-import { DRUM_PADS } from "./constants";
+import { DRUM_PADS, DRUM_PAD_LABELS, DRUM_PAD_HOTKEYS } from "./constants";
 
 import "./App.css";
-
-const drum_pad_labels = Object.keys(DRUM_PADS) as DrumPadLabel[];
-const drum_pad_hotkeys = drum_pad_labels.map(label => DRUM_PADS[label].hotkey);
 
 const to_kebab_case = (str: string): string => str.split(/\s|_/g).join("-").toLocaleLowerCase();
 const to_title_case = (str: string): string => str
@@ -16,7 +13,7 @@ const to_title_case = (str: string): string => str
 	.join(" ");
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
-	if (drum_pad_hotkeys.indexOf(event.key.toLocaleLowerCase() as DrumPadHotkey) === -1) return;
+	if (DRUM_PAD_HOTKEYS.indexOf(event.key.toLocaleLowerCase() as DrumPadHotkey) === -1) return;
 
 	const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
 	const drum_pad = audio.parentElement as HTMLButtonElement;
@@ -43,7 +40,7 @@ function App(): ReactElement {
 					{audio_to_play.toLocaleUpperCase()}
 				</h3>
 				<div className="drum-pads">
-					{drum_pad_labels.map(label => (
+					{DRUM_PAD_LABELS.map(label => (
 						<button
 							key={label} className="drum-pad"
 							id={to_kebab_case(label)}

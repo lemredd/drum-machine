@@ -1,3 +1,5 @@
+import { DrumPadLabel } from "./types";
+
 export const DRUM_PADS = {
 	"Heater 1": {
 		"hotkey": "q",
@@ -36,3 +38,6 @@ export const DRUM_PADS = {
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3",
 	}
 } as const;
+
+export const DRUM_PAD_LABELS = Object.keys(DRUM_PADS) as DrumPadLabel[];
+export const DRUM_PAD_HOTKEYS = DRUM_PAD_LABELS.map(label => DRUM_PADS[label].hotkey);
