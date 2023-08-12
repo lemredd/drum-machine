@@ -9,7 +9,6 @@ import to_title_case from "./helpers/to_title_case";
 
 interface Props<TDrumPadLabelState = DrumPadLabel | ""> {
 	label: DrumPadLabel
-	audio_to_play: TDrumPadLabelState
 	set_audio_to_play: React.Dispatch<React.SetStateAction<TDrumPadLabelState>>
 }
 
@@ -24,6 +23,7 @@ export default function DrumPad({ label, set_audio_to_play }: Props): ReactEleme
 		function listen_for_hotkey_press(event: KeyboardEvent): void {
 			if (DRUM_PAD_HOTKEYS.indexOf(event.key.toLocaleLowerCase() as DrumPadHotkey) === -1) return;
 
+			// TODO(sub-optimal): use custom events to optimize!
 			const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
 			const { "id": drum_pad_btn_id } = audio.parentElement as HTMLButtonElement;
 			const label = to_title_case(drum_pad_btn_id).toLocaleUpperCase();
