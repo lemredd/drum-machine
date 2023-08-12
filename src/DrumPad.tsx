@@ -12,7 +12,7 @@ interface Props {
 	set_audio_to_play: React.Dispatch<React.SetStateAction<DrumPadLabel | "">>
 }
 
-window.addEventListener("keydown", (event: KeyboardEvent): void => {
+function listen_for_hotkey_press(event: KeyboardEvent): void {
 	if (DRUM_PAD_HOTKEYS.indexOf(event.key.toLocaleLowerCase() as DrumPadHotkey) === -1) return;
 
 	const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
@@ -24,7 +24,7 @@ window.addEventListener("keydown", (event: KeyboardEvent): void => {
 		.play()
 		.then((): void => { display.innerText = label; })
 		.catch((error): void => console.error(error));
-});
+}
 
 export default function DrumPad({ label, set_audio_to_play }: Props): ReactElement {
 	function handle_click(event: React.MouseEvent<HTMLButtonElement>, label: DrumPadLabel): void {
