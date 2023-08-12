@@ -26,11 +26,10 @@ export default function DrumPad({ label, audio_to_play, set_audio_to_play }: Pro
 		const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
 		const { "id": drum_pad_btn_id } = audio.parentElement as HTMLButtonElement;
 		const label = to_title_case(drum_pad_btn_id).toLocaleUpperCase();
-		const display = document.querySelector("#display") as HTMLHeadingElement;
 
 		audio
 			.play()
-			.then((): void => { display.innerText = label; })
+			.then((): void => set_audio_to_play(label as DrumPadLabel))
 			.catch((error): void => console.error(error));
 	}
 
