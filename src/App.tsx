@@ -1,6 +1,6 @@
 import { useState, type ReactElement } from "react";
 
-import type { DrumPadLabel, DrumPadHotkey } from "./types";
+import type { DrumPadLabel } from "./types";
 
 import { DRUM_PAD_LABELS } from "./constants";
 

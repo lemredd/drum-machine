@@ -7,16 +7,17 @@ import { DRUM_PADS, DRUM_PAD_HOTKEYS } from "./constants";
 import to_kebab_case from "./helpers/to_kebab_case";
 import to_title_case from "./helpers/to_title_case";
 
-window.addEventListener("keydown", (event: KeyboardEvent) => {
+window.addEventListener("keydown", (event: KeyboardEvent): void => {
 	if (DRUM_PAD_HOTKEYS.indexOf(event.key.toLocaleLowerCase() as DrumPadHotkey) === -1) return;
 
 	const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
 	const drum_pad = audio.parentElement as HTMLButtonElement;
 	const display = document.querySelector("#display") as HTMLHeadingElement;
 
-	audio.play().then((): void => {
-		display.innerText = to_title_case(drum_pad.id).toLocaleUpperCase();
-	}).catch(error => console.error(error));
+	audio
+		.play()
+		.then((): void => { display.innerText = to_title_case(drum_pad.id).toLocaleUpperCase(); })
+		.catch((error): void => console.error(error));
 });
 
 interface Props {
