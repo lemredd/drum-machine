@@ -13,30 +13,26 @@ function App(): ReactElement {
 	const [hotkey_pressed, set_hotkey_pressed] = useState<DrumPadHotkey | "">("");
 
 	useEffect(() => {
-		function set_valid_hotkey(event: KeyboardEvent): void {
-			const key = event.key.toLocaleLowerCase() as DrumPadHotkey;
+		function set_valid_hotkey(event: KeyboardEvent, unset = false): void {
+			const key = event.key.toLowerCase() as DrumPadHotkey;
 			const is_valid_hotkey = DRUM_PAD_HOTKEYS.indexOf(key) !== -1;
 
-			if (is_valid_hotkey) set_hotkey_pressed(key);
+			if (is_valid_hotkey) set_hotkey_pressed(unset ? "" : key);
 		}
 
-		window.addEventListener("keydown", set_valid_hotkey);
-		window.addEventListener("keyup", (event) => {
-			const key = event.key.toLocaleLowerCase() as DrumPadHotkey;
-			const is_valid_hotkey = DRUM_PAD_HOTKEYS.indexOf(key) !== -1;
-
-			if (is_valid_hotkey) set_hotkey_pressed("");
-		});
+		window.addEventListener("keydown", (event) => set_valid_hotkey(event));
+		window.addEventListener("keyup", (event) => set_valid_hotkey(event, true));
 
 		return () => {
-			window.removeEventListener("keydown", set_valid_hotkey);
+			window.removeEventListener("keydown", (event) => set_valid_hotkey(event));
+			window.removeEventListener("keyup", (event) => set_valid_hotkey(event, true));
 		};
 	});
 
 	return (
 		<div id="drum-machine">
 			<h3 id="display">
-				{audio_to_play.toLocaleUpperCase()}
+				{audio_to_play}
 			</h3>
 			<div className="drum-pads">
 				{DRUM_PAD_LABELS.map(label => (
