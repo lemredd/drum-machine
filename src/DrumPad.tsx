@@ -16,6 +16,7 @@ export default function DrumPad(
 	{ label, hotkey_pressed, set_audio_to_play }: Props
 ): ReactElement {
 	const audio = useRef<HTMLAudioElement>(null);
+	const audio_id = DRUM_PADS[label].hotkey.toLocaleUpperCase();
 
 	function handle_click(label: DrumPadLabel): void {
 		audio.current!
@@ -27,8 +28,8 @@ export default function DrumPad(
 	useEffect((): void => {
 		if (!audio.current) return;
 
-		const audio_id = audio.current.id.toLocaleLowerCase();
 		const is_matching_hotkey = audio_id === hotkey_pressed;
+		const is_matching_hotkey = audio_id.toLocaleLowerCase() === hotkey_pressed;
 
 		if (is_matching_hotkey) audio.current
 			.play()
@@ -43,7 +44,7 @@ export default function DrumPad(
 			onClick={(): void => handle_click(label)}
 		>
 			<audio
-				id={DRUM_PADS[label].hotkey.toLocaleUpperCase()}
+				id={audio_id}
 				className="clip"
 				ref={audio}
 				src={DRUM_PADS[label].audio}
