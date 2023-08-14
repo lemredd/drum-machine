@@ -13,12 +13,15 @@ function App(): ReactElement {
 	const [hotkey_pressed, set_hotkey_pressed] = useState<DrumPadHotkey | "">("");
 
 	useEffect(() => {
-		window.addEventListener("keydown", (event: KeyboardEvent) => {
+		function set_valid_hotkey(event: KeyboardEvent): void {
 			const key = event.key as DrumPadHotkey;
 			const is_valid_hotkey = DRUM_PAD_HOTKEYS.indexOf(key) !== -1;
 
 			if (is_valid_hotkey) set_hotkey_pressed(key);
-		});
+		}
+
+		window.addEventListener("keydown", set_valid_hotkey);
+
 	});
 
 	return (
