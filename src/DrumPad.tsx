@@ -2,10 +2,9 @@ import { useEffect, useRef, type ReactElement } from "react";
 
 import type { DrumPadLabel, DrumPadHotkey } from "./types";
 
-import { DRUM_PADS, DRUM_PAD_HOTKEYS } from "./constants";
+import { DRUM_PADS } from "./constants";
 
 import to_kebab_case from "./helpers/to_kebab_case";
-import to_title_case from "./helpers/to_title_case";
 
 interface Props {
 	label: DrumPadLabel
@@ -26,11 +25,16 @@ export default function DrumPad(
 	}
 
 	useEffect((): void => {
-		audio.current!
+		if (!audio.current) return;
+
+		const audio_id = audio.current.id.toLocaleLowerCase();
+		const is_matching_hotkey = audio_id === hotkey_pressed;
+
+		if (is_matching_hotkey) audio.current
 			.play()
 			.then(() => set_audio_to_play(label))
 			.catch(err => console.error(err));
-	}, [hotkey_pressed]);
+	});
 
 	return (
 		<button
