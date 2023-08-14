@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactElement } from "react";
 
 import type { DrumPadHotkey, DrumPadLabel } from "./types";
 
-import { DRUM_PAD_HOTKEYS, DRUM_PAD_LABELS } from "./constants";
+import { DRUM_PAD_LABELS } from "./constants";
 
 import DrumPad from "./DrumPad";
 
@@ -15,9 +15,8 @@ function App(): ReactElement {
 	useEffect(() => {
 		function set_valid_hotkey(event: KeyboardEvent, unset = false): void {
 			const key = event.key.toLowerCase() as DrumPadHotkey;
-			const is_valid_hotkey = DRUM_PAD_HOTKEYS.indexOf(key) !== -1;
 
-			if (is_valid_hotkey) set_hotkey_pressed(unset ? "" : key);
+			set_hotkey_pressed(unset ? "" : key);
 		}
 
 		document.addEventListener("keydown", (event) => set_valid_hotkey(event));
