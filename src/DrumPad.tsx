@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactElement } from "react";
+import { useEffect, type ReactElement } from "react";
 
 import type { DrumPadLabel, DrumPadHotkey } from "./types";
 
@@ -15,8 +15,8 @@ interface Props {
 export default function DrumPad(
 	{ label, hotkey_pressed, set_audio_to_play }: Props
 ): ReactElement {
-	const audio = useRef<HTMLAudioElement>(null);
 	const audio_id = DRUM_PADS[label].hotkey.toLocaleUpperCase();
+	const audio_element = document.getElementById(audio_id) as HTMLAudioElement;
 
 	function handle_click(label: DrumPadLabel): void {
 		audio.current!
@@ -26,9 +26,8 @@ export default function DrumPad(
 	}
 
 	useEffect((): void => {
-		if (!audio.current) return;
+		if (!audio_element) return;
 
-		const is_matching_hotkey = audio_id === hotkey_pressed;
 		const is_matching_hotkey = audio_id.toLocaleLowerCase() === hotkey_pressed;
 
 		if (is_matching_hotkey) audio.current
@@ -46,7 +45,6 @@ export default function DrumPad(
 			<audio
 				id={audio_id}
 				className="clip"
-				ref={audio}
 				src={DRUM_PADS[label].audio}
 			/>
 			{DRUM_PADS[label].hotkey.toLocaleUpperCase()}
