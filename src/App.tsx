@@ -1,6 +1,6 @@
 import { useState, type ReactElement } from "react";
 
-import type { DrumPadLabel } from "./types";
+import type { DrumPadHotkey, DrumPadLabel } from "./types";
 
 import { DRUM_PAD_LABELS } from "./constants";
 
@@ -10,6 +10,7 @@ import "./App.css";
 
 function App(): ReactElement {
 	const [audio_to_play, set_audio_to_play] = useState<DrumPadLabel | "">("");
+	const [hotkey_pressed, set_hotkey_pressed] = useState<DrumPadHotkey | "">("");
 
 	return (
 		<div id="drum-machine">
