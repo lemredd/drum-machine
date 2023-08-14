@@ -22,6 +22,9 @@ function App(): ReactElement {
 
 		window.addEventListener("keydown", set_valid_hotkey);
 
+		return () => {
+			window.removeEventListener("keydown", set_valid_hotkey);
+		};
 	});
 
 	return (
