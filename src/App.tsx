@@ -20,12 +20,12 @@ function App(): ReactElement {
 			if (is_valid_hotkey) set_hotkey_pressed(unset ? "" : key);
 		}
 
-		window.addEventListener("keydown", (event) => set_valid_hotkey(event));
-		window.addEventListener("keyup", (event) => set_valid_hotkey(event, true));
+		document.addEventListener("keydown", (event) => set_valid_hotkey(event));
+		document.addEventListener("keyup", (event) => set_valid_hotkey(event, true));
 
 		return () => {
-			window.removeEventListener("keydown", (event) => set_valid_hotkey(event));
-			window.removeEventListener("keyup", (event) => set_valid_hotkey(event, true));
+			document.removeEventListener("keydown", (event) => set_valid_hotkey(event));
+			document.removeEventListener("keyup", (event) => set_valid_hotkey(event, true));
 		};
 	});
 
