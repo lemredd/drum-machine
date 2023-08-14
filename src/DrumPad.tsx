@@ -7,9 +7,10 @@ import { DRUM_PADS, DRUM_PAD_HOTKEYS } from "./constants";
 import to_kebab_case from "./helpers/to_kebab_case";
 import to_title_case from "./helpers/to_title_case";
 
-interface Props<TDrumPadLabelState = DrumPadLabel | ""> {
+interface Props {
 	label: DrumPadLabel
-	set_audio_to_play: React.Dispatch<React.SetStateAction<TDrumPadLabelState>>
+	hotkey_pressed: DrumPadHotkey | ""
+	set_audio_to_play: React.Dispatch<React.SetStateAction< DrumPadLabel | "">>
 }
 
 export default function DrumPad({ label, set_audio_to_play }: Props): ReactElement {
@@ -19,25 +20,9 @@ export default function DrumPad({ label, set_audio_to_play }: Props): ReactEleme
 		audio.play().then(() => set_audio_to_play(label)).catch(err => console.error(err));
 	}
 
-	useEffect((): () => (void) => {
-		function listen_for_hotkey_press(event: KeyboardEvent): void {
-			if (DRUM_PAD_HOTKEYS.indexOf(event.key.toLocaleLowerCase() as DrumPadHotkey) === -1) return;
-
-			// TODO(sub-optimal): use custom events to optimize!
-			const audio = document.querySelector(`audio#${event.key.toUpperCase()}`) as HTMLAudioElement;
-			const { "id": drum_pad_btn_id } = audio.parentElement as HTMLButtonElement;
-			const label = to_title_case(drum_pad_btn_id).toLocaleUpperCase();
-
-			audio
-				.play()
-				.then((): void => set_audio_to_play(label as DrumPadLabel))
-				.catch((error): void => console.error(error));
-		}
-
-		window.addEventListener("keydown", listen_for_hotkey_press);
-
-		return (): void => window.removeEventListener("keydown", listen_for_hotkey_press);
-	}, [set_audio_to_play]);
+	useEffect((): void => {
+	
+	}, []);
 
 	return (
 		<button
