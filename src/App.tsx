@@ -19,8 +19,8 @@ function App(): ReactElement {
 			set_hotkey_pressed(unset ? "" : key);
 		}
 
-		document.addEventListener("keydown", (event) => set_valid_hotkey(event));
-		document.addEventListener("keyup", (event) => set_valid_hotkey(event, true));
+		document.addEventListener("keydown", (event) => set_valid_hotkey(event), { "once": true });
+		document.addEventListener("keyup", (event) => set_valid_hotkey(event, true), { "once": true });
 
 		return () => {
 			document.removeEventListener("keydown", (event) => set_valid_hotkey(event));
