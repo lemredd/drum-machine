@@ -21,6 +21,12 @@ function App(): ReactElement {
 		}
 
 		window.addEventListener("keydown", set_valid_hotkey);
+		window.addEventListener("keyup", (event) => {
+			const key = event.key.toLocaleLowerCase() as DrumPadHotkey;
+			const is_valid_hotkey = DRUM_PAD_HOTKEYS.indexOf(key) !== -1;
+
+			if (is_valid_hotkey) set_hotkey_pressed("");
+		});
 
 		return () => {
 			window.removeEventListener("keydown", set_valid_hotkey);
