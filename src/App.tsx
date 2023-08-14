@@ -14,7 +14,7 @@ function App(): ReactElement {
 
 	useEffect(() => {
 		function set_valid_hotkey(event: KeyboardEvent): void {
-			const key = event.key as DrumPadHotkey;
+			const key = event.key.toLocaleLowerCase() as DrumPadHotkey;
 			const is_valid_hotkey = DRUM_PAD_HOTKEYS.indexOf(key) !== -1;
 
 			if (is_valid_hotkey) set_hotkey_pressed(key);
