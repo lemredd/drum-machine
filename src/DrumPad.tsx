@@ -16,31 +16,29 @@ export default function DrumPad(
 	{ label, hotkey_pressed, set_audio_to_play }: Props
 ): ReactElement {
 	const audio_id = DRUM_PADS[label].hotkey.toLocaleUpperCase();
-	const audio_element = document.getElementById(audio_id) as HTMLAudioElement;
+	function play(audio: HTMLAudioElement): void {
+		audio.currentTime = 0;
+		set_audio_to_play(label);
+		audio.play().catch(err => console.error(err));
+	}
 
-	function handle_click(label: DrumPadLabel): void {
-		audio.current!
-			.play()
-			.then(() => set_audio_to_play(label))
-			.catch(err => console.error(err));
+	function handle_click(): void {
+		const audio = document.getElementById(audio_id) as HTMLAudioElement;
+		play(audio);
 	}
 
 	useEffect((): void => {
-		if (!audio_element) return;
-
+		const audio = document.getElementById(audio_id) as HTMLAudioElement;
 		const is_matching_hotkey = audio_id.toLocaleLowerCase() === hotkey_pressed;
 
-		if (is_matching_hotkey) audio.current
-			.play()
-			.then(() => set_audio_to_play(label))
-			.catch(err => console.error(err));
+		if (is_matching_hotkey) play(audio);
 	});
 
 	return (
 		<button
 			className="drum-pad"
 			id={to_kebab_case(label)}
-			onClick={(): void => handle_click(label)}
+			onClick={handle_click}
 		>
 			<audio
 				id={audio_id}
