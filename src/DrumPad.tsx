@@ -23,11 +23,6 @@ export default function DrumPad(
 		audio.play().catch(err => console.error(err));
 	}
 
-	function handle_click(): void {
-		const audio = document.getElementById(audio_id) as HTMLAudioElement;
-		play(audio);
-	}
-
 	useEffect((): void => {
 		const is_valid_hotkey = DRUM_PAD_HOTKEYS
 			.indexOf(hotkey_pressed as DrumPadHotkey) !== -1;
@@ -41,7 +36,7 @@ export default function DrumPad(
 		<button
 			className="drum-pad"
 			id={to_kebab_case(label)}
-			onClick={handle_click}
+			onClick={play}
 		>
 			<audio
 				id={audio_id}
