@@ -26,8 +26,11 @@ export default function DrumPad(
 	}
 
 	useEffect((): void => {
-	
-	}, []);
+		audio.current!
+			.play()
+			.then(() => set_audio_to_play(label))
+			.catch(err => console.error(err));
+	}, [hotkey_pressed]);
 
 	return (
 		<button
