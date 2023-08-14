@@ -13,12 +13,16 @@ interface Props {
 	set_audio_to_play: React.Dispatch<React.SetStateAction< DrumPadLabel | "">>
 }
 
-export default function DrumPad({ label, set_audio_to_play }: Props): ReactElement {
-	function handle_click(event: React.MouseEvent<HTMLButtonElement>, label: DrumPadLabel): void {
+export default function DrumPad(
+	{ label, hotkey_pressed, set_audio_to_play }: Props
+): ReactElement {
 	const audio = useRef<HTMLAudioElement>(null);
-		const target = event.target as HTMLButtonElement;
-		const audio = target.firstChild as HTMLAudioElement;
-		audio.play().then(() => set_audio_to_play(label)).catch(err => console.error(err));
+
+	function handle_click(label: DrumPadLabel): void {
+		audio.current!
+			.play()
+			.then(() => set_audio_to_play(label))
+			.catch(err => console.error(err));
 	}
 
 	useEffect((): void => {
@@ -29,7 +33,7 @@ export default function DrumPad({ label, set_audio_to_play }: Props): ReactEleme
 		<button
 			className="drum-pad"
 			id={to_kebab_case(label)}
-			onClick={(event): void => handle_click(event, label)}
+			onClick={(): void => handle_click(label)}
 		>
 			<audio
 				id={DRUM_PADS[label].hotkey.toLocaleUpperCase()}
