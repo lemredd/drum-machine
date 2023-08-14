@@ -1,4 +1,4 @@
-import { DrumPadLabel } from "./types";
+import { DrumPadHotkey, DrumPadLabel } from "./types";
 
 export const DRUM_PADS = {
 	"Heater 1": {
@@ -40,4 +40,4 @@ export const DRUM_PADS = {
 } as const;
 
 export const DRUM_PAD_LABELS = Object.keys(DRUM_PADS) as DrumPadLabel[];
-export const DRUM_PAD_HOTKEYS = DRUM_PAD_LABELS.map(label => DRUM_PADS[label].hotkey);
+export const DRUM_PAD_HOTKEYS  = DRUM_PAD_LABELS.map(label => `Key${DRUM_PADS[label].hotkey}`) as DrumPadHotkey[];
