@@ -16,7 +16,8 @@ export default function DrumPad(
 	{ label, hotkey_pressed, set_audio_to_play }: Props
 ): ReactElement {
 	const audio_id = DRUM_PADS[label].hotkey.toLocaleUpperCase();
-	function play(audio: HTMLAudioElement): void {
+	function play(): void {
+		const audio = document.getElementById(audio_id) as HTMLAudioElement;
 		audio.currentTime = 0;
 		set_audio_to_play(label);
 		audio.play().catch(err => console.error(err));
@@ -33,7 +34,7 @@ export default function DrumPad(
 		if (!is_valid_hotkey) return;
 		const is_matching_hotkey = audio_id.toLocaleLowerCase() === hotkey_pressed;
 
-		if (is_matching_hotkey) play(audio);
+		if (is_matching_hotkey && is_valid_hotkey) play();
 	});
 
 	return (
