@@ -10,6 +10,7 @@
 
 #drum-machine {
 	height: 100%;
+	max-height: 120vw;
 	display: grid;
 	grid-template-rows: minmax(48px, 1fr) 3fr;
 	grid-template-areas:
@@ -37,4 +38,10 @@
 	grid-area: drumpads;
 	grid-template-columns: repeat(3, 1fr);
 	gap: .5rem;
+}
+
+@media screen and (min-width: 640px) {
+	#drum-machine {
+		max-height: initial;
+	}
 }
