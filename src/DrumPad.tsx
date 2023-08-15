@@ -28,7 +28,6 @@ export default function DrumPad(
 			const is_valid_hotkey = DRUM_PAD_HOTKEYS.indexOf(event.code as DrumPadHotkey) !== -1;
 			if (!is_valid_hotkey) return;
 
-			console.log(event.code);
 			const is_matching_hotkey = `Key${audio_id}` === event.code;
 
 			if (is_matching_hotkey && is_valid_hotkey) play();
