@@ -25,7 +25,10 @@
 	height: 80%;
 	margin: 0;
 	border: 1px solid #808080;
+	border-radius: .25em;
 
+	display: grid;
+	place-items: center;
 }
 
 .drum-pads {
