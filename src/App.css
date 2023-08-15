@@ -25,4 +25,10 @@
 	margin: 0;
 }
 
+.drum-pads {
+	height: 100%;
+	display: grid;
+	grid-area: drumpads;
+	grid-template-columns: repeat(3, 1fr);
+	gap: .5rem;
 }
