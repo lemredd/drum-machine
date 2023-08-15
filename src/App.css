@@ -8,6 +8,6 @@
 
 }
 
-.read-the-docs {
-	color: #888;
+#drum-machine {
+	display: grid;
 }
