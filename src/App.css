@@ -32,8 +32,9 @@
 	border: var(--border);
 	border-radius: .25em;
 
-	display: grid;
-	place-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .drum-pads {
