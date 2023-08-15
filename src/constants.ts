@@ -1,43 +1,43 @@
-import { DrumPadLabel } from "./types";
+import { DrumPadHotkey, DrumPadLabel } from "./types";
 
 export const DRUM_PADS = {
 	"Heater 1": {
-		"hotkey": "q",
+		"hotkey": "Q",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3",
 	},
 	"Heater 2": {
-		"hotkey": "w",
+		"hotkey": "W",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3",
 	},
 	"Heater 3": {
-		"hotkey": "e",
+		"hotkey": "E",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3",
 	},
 	"Heater 4": {
-		"hotkey": "a",
+		"hotkey": "A",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3",
 	},
 	"Clap": {
-		"hotkey": "s",
+		"hotkey": "S",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3",
 	},
 	"Open HH": {
-		"hotkey": "d",
+		"hotkey": "D",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3",
 	},
 	"Kick n' Hat": {
-		"hotkey": "z",
+		"hotkey": "Z",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3",
 	},
 	"Kick": {
-		"hotkey": "x",
+		"hotkey": "X",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3",
 	},
 	"Closed HH": {
-		"hotkey": "c",
+		"hotkey": "C",
 		"audio": "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3",
 	}
 } as const;
 
 export const DRUM_PAD_LABELS = Object.keys(DRUM_PADS) as DrumPadLabel[];
-export const DRUM_PAD_HOTKEYS = DRUM_PAD_LABELS.map(label => DRUM_PADS[label].hotkey);
+export const DRUM_PAD_HOTKEYS  = DRUM_PAD_LABELS.map(label => `Key${DRUM_PADS[label].hotkey}`) as DrumPadHotkey[];

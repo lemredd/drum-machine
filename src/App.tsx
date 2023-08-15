@@ -14,11 +14,14 @@ function App(): ReactElement {
 	return (
 		<div id="drum-machine">
 			<h3 id="display">
-				{audio_to_play.toLocaleUpperCase()}
+				{audio_to_play}
 			</h3>
 			<div className="drum-pads">
 				{DRUM_PAD_LABELS.map(label => (
-					<DrumPad key={label} {...{ label, set_audio_to_play }} />
+					<DrumPad
+						key={label}
+						{...{ label, set_audio_to_play }}
+					/>
 				))}
 			</div>
 		</div>
