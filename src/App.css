@@ -39,10 +39,13 @@
 
 .drum-pads {
 	height: 100%;
+	border: var(--border);
+	border-radius: .25em;
+	padding: 1rem;
 	display: grid;
 	grid-area: drumpads;
 	grid-template-columns: repeat(3, 1fr);
-	gap: .5rem;
+	gap: 1rem;
 }
 
 @media screen and (min-width: 640px) {
