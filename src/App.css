@@ -48,6 +48,17 @@
 	gap: 1rem;
 }
 
+.drum-pad {
+	background-color: #eee;
+}
+
+.drum-pad.active {
+	box-shadow:
+		inset 3px 3px 6px #8883,
+		inset -3px -3px 6px #8883
+	;
+}
+
 @media screen and (min-width: 768px) {
 	#drum-machine {
 		max-height: initial;
@@ -57,5 +68,9 @@
 @media (prefers-color-scheme: dark) {
 	#root {
 		--border: 1px solid #505050;
+	}
+	
+	.drum-pad {
+		background-color: #1a1a1a;
 	}
 }
