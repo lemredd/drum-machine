@@ -1,4 +1,4 @@
-import { useEffect, type ReactElement } from "react";
+import { useState, useEffect, type ReactElement } from "react";
 
 import type { DrumPadLabel, DrumPadHotkey } from "./types";
 
@@ -14,12 +14,16 @@ interface Props {
 export default function DrumPad(
 	{ label, set_audio_to_play }: Props
 ): ReactElement {
+	const [is_active, set_is_active] = useState<boolean>(false);
+
 	const audio_id = DRUM_PADS[label].hotkey;
 	function play(): void {
 		const audio = document.getElementById(audio_id) as HTMLAudioElement;
+		set_is_active(true);
 		audio.currentTime = 0;
 		set_audio_to_play(label);
 		audio.play().catch(err => console.error(err));
+		setTimeout(() => set_is_active(false), 100);
 	}
 
 	useEffect((): void => {
@@ -28,16 +32,16 @@ export default function DrumPad(
 			const is_valid_hotkey = DRUM_PAD_HOTKEYS.indexOf(event.code as DrumPadHotkey) !== -1;
 			if (!is_valid_hotkey) return;
 
-			console.log(event.code);
 			const is_matching_hotkey = `Key${audio_id}` === event.code;
 
 			if (is_matching_hotkey && is_valid_hotkey) play();
 		});
-	});
+	/* eslint-disable react-hooks/exhaustive-deps */
+	}, []);
 
 	return (
 		<button
-			className="drum-pad"
+			className={`drum-pad ${is_active && "active"}`}
 			id={to_kebab_case(label)}
 			onClick={play}
 		>
